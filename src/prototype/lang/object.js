@@ -76,6 +76,23 @@
   }
 
   /**
+   *  Object.deep(destination, source) -> Object
+   *  - destination (Object): The object to receive the new properties.
+   *  - source (Object): The object whose properties will be duplicated.
+   *
+   *  Deep version of extend method.
+  **/
+  function deep(destination, source) {
+    for (var property in source)
+      if (Type(destination[property]) === OBJECT_TYPE && Type(source[property]) === OBJECT_TYPE) {
+        destination[property] = deep(destination[property], source[property]);
+      } else {
+        destination[property] = source[property];
+      }
+    return destination;
+  }
+
+  /**
    *  Object.inspect(obj) -> String
    *  - object (Object): The item to be inspected.
    *  
@@ -566,6 +583,7 @@
 
   extend(Object, {
     extend:        extend,
+    deep:          deep,
     inspect:       inspect,
     toJSON:        NATIVE_JSON_STRINGIFY_SUPPORT ? stringify : toJSON,
     toQueryString: toQueryString,
