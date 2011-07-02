@@ -82,7 +82,7 @@
    *
    *  Deep version of extend method.
   **/
-  function deep(destination, source) {
+  function deepExtend(destination, source) {
     for (var property in source)
       if (Type(destination[property]) === OBJECT_TYPE && Type(source[property]) === OBJECT_TYPE) {
         destination[property] = deep(destination[property], source[property]);
